@@ -24,7 +24,7 @@ class RequestTokenUseCaseTest {
     private val useCase = RequestTokenUseCase(api)
 
     @Test
-    fun `WHEN use case is invoked the api service SHOULD return an AuthenticationResponse`() = runBlocking {
+    fun `WHEN use case is invoked the createToken api call SHOULD return an AuthenticationResponse`() = runBlocking {
         // GIVEN
         whenever(api.createToken()).thenReturn(TOKEN_RESPONSE)
 
@@ -38,7 +38,7 @@ class RequestTokenUseCaseTest {
     }
 
     @Test
-    fun `WHEN use case is invoked the api service SHOULD return an HttpException`() = runBlocking {
+    fun `WHEN use case is invoked the createToken api call SHOULD throw a HttpException`() = runBlocking {
         // GIVEN
         whenever(httpException.localizedMessage).thenReturn(HTTP_ERROR)
         whenever(api.createToken()).thenThrow(httpException)
@@ -53,7 +53,7 @@ class RequestTokenUseCaseTest {
     }
 
     @Test
-    fun `WHEN use case is invoked the api service SHOULD validate the HTTP ERROR MESSAGE`() = runBlocking {
+    fun `WHEN use case is invoked the createToken api call SHOULD throw a HTTP ERROR MESSAGE`() = runBlocking {
         // GIVEN
         whenever(httpException.localizedMessage).thenReturn(null)
         whenever(api.createToken()).thenThrow(httpException)

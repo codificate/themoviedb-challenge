@@ -3,7 +3,6 @@ package com.challenge.themoviedb
 import com.challenge.themoviedb.data.DataResource
 import com.challenge.themoviedb.data.HTTP_EXCEPTION_ERROR_MESSAGE
 import com.challenge.themoviedb.data.api.AuthenticationApiService
-import com.challenge.themoviedb.data.network.request.CreateSessionRequest
 import com.challenge.themoviedb.data.network.response.SessionCreatedResponse
 import com.challenge.themoviedb.domain.use_cases.auth.CreateSessionUseCase
 import com.nhaarman.mockitokotlin2.any
@@ -15,7 +14,6 @@ import org.junit.runner.RunWith
 import org.powermock.modules.junit4.PowerMockRunner
 import retrofit2.HttpException
 import java.lang.Boolean.TRUE
-import java.util.function.BooleanSupplier
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -27,7 +25,7 @@ class CreateSessionUseCaseTest {
     private val useCase = CreateSessionUseCase(api)
 
     @Test
-    fun `WHEN use case is invoked the api service SHOULD return an SessionCreatedResponse`() = runBlocking {
+    fun `WHEN use case is invoked the createSession api call SHOULD return an SessionCreatedResponse`() = runBlocking {
         // GIVEN
         whenever(api.createSession(apiKey = any(), createSessionRequest =  any())).thenReturn(SESSION_RESPONSE)
 
@@ -41,7 +39,7 @@ class CreateSessionUseCaseTest {
     }
 
     @Test
-    fun `WHEN use case is invoked the api service SHOULD return an HttpException`() = runBlocking {
+    fun `WHEN use case is invoked the createSession api call SHOULD throw a HttpException`() = runBlocking {
         // GIVEN
         whenever(httpException.localizedMessage).thenReturn(HTTP_ERROR)
         whenever(api.createSession(apiKey = any(), createSessionRequest =  any())).thenThrow(httpException)
@@ -56,7 +54,7 @@ class CreateSessionUseCaseTest {
     }
 
     @Test
-    fun `WHEN use case is invoked the api service SHOULD validate the HTTP ERROR MESSAGE`() = runBlocking {
+    fun `WHEN use case is invoked the createSession api call SHOULD throw a HTTP ERROR MESSAGE`() = runBlocking {
         // GIVEN
         whenever(httpException.localizedMessage).thenReturn(null)
         whenever(api.createSession(apiKey = any(), createSessionRequest =  any())).thenThrow(httpException)

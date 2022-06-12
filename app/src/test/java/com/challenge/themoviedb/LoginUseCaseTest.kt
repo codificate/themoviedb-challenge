@@ -25,7 +25,7 @@ class LoginUseCaseTest {
     private val useCase = LoginUseCase(api)
 
     @Test
-    fun `WHEN use case is invoked the api service SHOULD return an AuthenticationResponse`() = runBlocking {
+    fun `WHEN use case is invoked the validateLogin api call SHOULD return an AuthenticationResponse`() = runBlocking {
         // GIVEN
         whenever(api.validateLogin(apiKey = any(), loginRequest =  any())).thenReturn(TOKEN_RESPONSE)
 
@@ -39,7 +39,7 @@ class LoginUseCaseTest {
     }
 
     @Test
-    fun `WHEN use case is invoked the api service SHOULD return an HttpException`() = runBlocking {
+    fun `WHEN use case is invoked the validateLogin api call SHOULD throw a HttpException`() = runBlocking {
         // GIVEN
         whenever(httpException.localizedMessage).thenReturn(HTTP_ERROR)
         whenever(api.validateLogin(apiKey = any(), loginRequest =  any())).thenThrow(httpException)
@@ -54,7 +54,7 @@ class LoginUseCaseTest {
     }
 
     @Test
-    fun `WHEN use case is invoked the api service SHOULD validate the HTTP ERROR MESSAGE`() = runBlocking {
+    fun `WHEN use case is invoked the validateLogin api call SHOULD throw a HTTP ERROR MESSAGE`() = runBlocking {
         // GIVEN
         whenever(httpException.localizedMessage).thenReturn(null)
         whenever(api.validateLogin(apiKey = any(), loginRequest =  any())).thenThrow(httpException)

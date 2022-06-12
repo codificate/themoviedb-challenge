@@ -1,6 +1,8 @@
 package com.challenge.themoviedb.domain.use_cases.auth
 
 import com.challenge.themoviedb.data.DataResource
+import com.challenge.themoviedb.data.HTTP_EXCEPTION_ERROR_MESSAGE
+import com.challenge.themoviedb.data.IOEXCEPTION_ERROR_MESSAGE
 import com.challenge.themoviedb.data.api.AuthenticationApiService
 import com.challenge.themoviedb.data.network.request.CreateSessionRequest
 import com.challenge.themoviedb.data.network.response.SessionCreatedResponse
@@ -19,9 +21,9 @@ class CreateSessionUseCase @Inject constructor(private val apiService: Authentic
             val sessionCreated = apiService.createSession(createSessionRequest = CreateSessionRequest(token))
             emit(DataResource.Success(sessionCreated))
         } catch (e: HttpException) {
-            emit(DataResource.Error(e.localizedMessage ?: "An unexpected error occurred"))
+            emit(DataResource.Error(e.localizedMessage ?: HTTP_EXCEPTION_ERROR_MESSAGE))
         } catch (e: IOException) {
-            emit(DataResource.Error("Couldn't reach server. Check your internet connection."))
+            emit(DataResource.Error(IOEXCEPTION_ERROR_MESSAGE))
         }
     }.flowOn(Dispatchers.IO)
 }

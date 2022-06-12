@@ -1,6 +1,8 @@
 package com.challenge.themoviedb.domain.use_cases.movies
 
 import com.challenge.themoviedb.data.DataResource
+import com.challenge.themoviedb.data.HTTP_EXCEPTION_ERROR_MESSAGE
+import com.challenge.themoviedb.data.IOEXCEPTION_ERROR_MESSAGE
 import com.challenge.themoviedb.data.api.MoviesApiService
 import com.challenge.themoviedb.domain.model.MoviesPages
 import com.challenge.themoviedb.domain.model.toMoviesPage
@@ -19,9 +21,9 @@ class FetchPopularMoviesUseCase @Inject constructor(private val apiService: Movi
             val popularMoviesList = apiService.fetchPopularMovies()
             emit(DataResource.Success(popularMoviesList.toMoviesPage()))
         } catch (e: HttpException) {
-            emit(DataResource.Error(e.localizedMessage ?: "An unexpected error occurred"))
+            emit(DataResource.Error(e.localizedMessage ?: HTTP_EXCEPTION_ERROR_MESSAGE))
         } catch (e: IOException) {
-            emit(DataResource.Error("Couldn't reach server. Check your internet connection."))
+            emit(DataResource.Error(IOEXCEPTION_ERROR_MESSAGE))
         }
     }.flowOn(Dispatchers.IO)
 }

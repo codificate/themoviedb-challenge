@@ -1,11 +1,16 @@
 package com.challenge.themoviedb.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import com.challenge.themoviedb.data.api.RetrofitInstance
 import com.challenge.themoviedb.data.api.AuthenticationApiService
 import com.challenge.themoviedb.data.api.MoviesApiService
+import com.challenge.themoviedb.data.repository.SessionManagerImpl
+import com.challenge.themoviedb.domain.repository.SessionManager
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import javax.inject.Singleton
@@ -14,6 +19,19 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class TMBDModule {
+
+    @Provides
+    fun provideSharedPreferences(@ApplicationContext context: Context) : SharedPreferences {
+        return context.getSharedPreferences(
+            "SESSION_MANAGER_PREFERENCES", Context.MODE_PRIVATE
+        )
+    }
+
+    @Singleton
+    @Provides
+    fun provideSessionManager(preferences: SharedPreferences) : SessionManager {
+        return SessionManagerImpl(preferences)
+    }
 
     @Provides
     @Singleton

@@ -9,21 +9,5 @@
         android:id="@+id/discoverMoviesFragment"
         android:name="com.challenge.themoviedb.presentation.ui.DiscoverMoviesFragment"
         tools:layout="@layout/fragment_discover_movies"/>
-    <!--
-        <fragment
-            android:id="@+id/discoverMoviesFragment"
-            android:name="com.challenge.themoviedb.presentation.ui.DiscoverMoviesFragment"
-            tools:layout="@layout/fragment_discover_movies">
-
-            <action
-                android:id="@+id/action_listTasksFragment_to_createNewTaskFragment"
-                app:destination="@id/createNewTaskFragment" />
-        </fragment>
-
-        <fragment
-            android:id="@+id/createNewTaskFragment"
-            android:name="com.tasks.viemed.presentation.create.CreateTaskFragment"
-            tools:layout="@layout/fragment_create_task"/>
-    -->
 
 </navigation>

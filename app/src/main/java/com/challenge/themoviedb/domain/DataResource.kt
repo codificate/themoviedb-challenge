@@ -1,4 +1,4 @@
-package com.challenge.themoviedb.data
+package com.challenge.themoviedb.domain
 
 sealed class DataResource<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T) : DataResource<T>(data)

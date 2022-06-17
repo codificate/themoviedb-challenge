@@ -2,7 +2,7 @@ package com.challenge.themoviedb.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.challenge.themoviedb.data.DataResource
+import com.challenge.themoviedb.domain.DataResource
 import com.challenge.themoviedb.domain.repository.SessionManager
 import com.challenge.themoviedb.domain.use_cases.auth.RequestTokenUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

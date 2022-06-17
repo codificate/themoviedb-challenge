@@ -1,11 +1,11 @@
 package com.challenge.themoviedb.domain.use_cases.auth
 
-import com.challenge.themoviedb.data.DataResource
-import com.challenge.themoviedb.data.HTTP_EXCEPTION_ERROR_MESSAGE
-import com.challenge.themoviedb.data.IOEXCEPTION_ERROR_MESSAGE
 import com.challenge.themoviedb.data.api.AuthenticationApiService
 import com.challenge.themoviedb.data.network.request.LoginRequest
 import com.challenge.themoviedb.data.network.response.AuthenticationTokenResponse
+import com.challenge.themoviedb.domain.DataResource
+import com.challenge.themoviedb.domain.HTTP_EXCEPTION_ERROR_MESSAGE
+import com.challenge.themoviedb.domain.IOEXCEPTION_ERROR_MESSAGE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow

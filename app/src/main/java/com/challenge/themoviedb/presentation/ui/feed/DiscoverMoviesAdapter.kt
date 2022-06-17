@@ -1,4 +1,4 @@
-package com.challenge.themoviedb.presentation.ui
+package com.challenge.themoviedb.presentation.ui.feed
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,11 +7,14 @@ import androidx.recyclerview.widget.ListAdapter
 import com.challenge.themoviedb.databinding.MovieItemRowBinding
 import com.challenge.themoviedb.domain.model.Movie
 
-class DiscoverMoviesAdapter :  ListAdapter<Movie, MovieItemViewHolder>(MovieItemDiffCallBack()) {
+class DiscoverMoviesAdapter(private val movieClickListener: DiscoverMoviesEventHandler) :  ListAdapter<Movie, MovieItemViewHolder>(
+    MovieItemDiffCallBack()
+) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieItemViewHolder {
         return MovieItemViewHolder(
-            MovieItemRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            MovieItemRowBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+            movieClickListener
         )
     }
 

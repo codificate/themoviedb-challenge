@@ -2,9 +2,11 @@ package com.challenge.themoviedb.di
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.challenge.themoviedb.data.api.RetrofitInstance
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.challenge.themoviedb.data.api.AuthenticationApiService
 import com.challenge.themoviedb.data.api.MoviesApiService
+import com.challenge.themoviedb.data.api.RetrofitInstance
 import com.challenge.themoviedb.data.repository.SessionManagerImpl
 import com.challenge.themoviedb.domain.repository.SessionManager
 import dagger.Module
@@ -22,8 +24,12 @@ class TMBDModule {
 
     @Provides
     fun provideSharedPreferences(@ApplicationContext context: Context) : SharedPreferences {
-        return context.getSharedPreferences(
-            "SESSION_MANAGER_PREFERENCES", Context.MODE_PRIVATE
+        return EncryptedSharedPreferences.create(
+            context,
+            "SESSION_MANAGER_PREFERENCES",
+            MasterKey.Builder(context, "SESSION_MANAGER_PREFERENCES").build(),
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
     }
 

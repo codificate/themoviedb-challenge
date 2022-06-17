@@ -1,5 +1,7 @@
 package com.challenge.themoviedb.data.network.response
 
+import com.challenge.themoviedb.domain.model.Movie
+
 data class MovieResponse(
     val adult: Boolean,
     val backdrop_path: String,
@@ -16,3 +18,13 @@ data class MovieResponse(
     val vote_average: Double,
     val vote_count: Int
 )
+
+fun MovieResponse.toMovie(): Movie {
+    return Movie(
+        this.id,
+        this.title,
+        this.overview,
+        this.poster_path,
+        this.vote_average
+    )
+}

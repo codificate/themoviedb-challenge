@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".presentation.ui.DiscoverMoviesFragment">
+        tools:context=".presentation.ui.feed.DiscoverMoviesFragment">
 
         <TextView
             android:id="@+id/movies_pull_call_to_action"
